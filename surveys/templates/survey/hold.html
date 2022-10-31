@@ -1,0 +1,551 @@
+<ul role="list" class="divide-y divide-gray-200 border border-gray-200">
+    {% if surveys %}
+    
+      {% for survey in surveys %}
+      <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+        <div class="flex items-center justify-between space-x-4">
+          <!-- Repo name and link -->
+          <div class="min-w-0 space-y-3">
+            <div class="flex items-center space-x-3">
+              {% if survey.is_active %}
+              <span
+                class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center"
+                aria-hidden="true">
+                <span class="h-2 w-2 bg-green-400 rounded-full"></span>
+              </span>
+              {% else %}
+              <span
+              class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center"
+              aria-hidden="true">
+              <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+            </span>
+              {% endif %}
+
+
+
+              <h2 class="text-sm font-medium">
+                {{ survey.title }}
+              </h2>
+            </div>
+            
+          </div>
+          <div class="sm:hidden">
+            <!-- Heroicon name: mini/chevron-right -->
+            <svg
+              class="h-5 w-5 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <!-- Repo meta info -->
+          <div
+            class="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex"
+          >
+            <p class="flex items-center space-x-4">
+              <a
+                href="#"
+                class="relative text-sm font-medium text-gray-500 hover:text-gray-900"
+                >View Results</a
+              >
+              <button
+                type="button"
+                class="relative rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                
+                <!--
+              Heroicon name: mini/star
+
+              Starred: "text-yellow-300 hover:text-yellow-400", Not Starred: "text-gray-300 hover:text-gray-400"
+            -->
+                <svg
+                  class="text-yellow-300 hover:text-yellow-400 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </p>
+            <p class="flex space-x-2 text-sm text-gray-500">
+              <span>Created on {{ surveys.create_at }}</span>
+            </p>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+      <!-- More projects... -->
+    </ul>
+    {% else %}
+    <div class="">
+      No surveys yet
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- EDIT HTML -->
+
+<!-- Survey List -->
+<div class="bg-white lg:min-w-0 lg:flex-1">
+  <div
+    class=" border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6"
+  >
+    <div class="flex items-center">
+      <h1 class="flex-1 text-lg font-medium">Surveys</h1>    
+    </div>
+    <div class="">
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div
+            class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+          >
+
+          <div class="ui center aligned basic very padded segment">
+            <h1 class="mb-5 text-center text-black font-bold text-xl">
+              Review/Edit your survey: {{survey.title}}
+            </h1>
+          
+            <div class="">
+              {% for question in questions %}
+              <div class="overflow-y-scroll">
+                <h4 class="mt-5 mb-3 text-lg font-bold">
+                  Question {{ forloop.counter }}: <br> 
+                </h4>
+                <p class="mb-5">
+                  {{ question.prompt }}
+                </p>
+                
+                
+                <ul>
+                  {% for option in question.option_set.all %}
+                  <li class="mb-1.5">{{ forloop.counter }}. {{option.text}}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <form method="POST" action="{% url 'question-delete' question.pk %}">
+                {% csrf_token %}
+                <button class="flex justify-center rounded-md border border-transparent bg-red-600 py-1 px-2 text-sm font-medium text-white shadow-sm my-5" type="submit">Delete Question</button>
+              </form>
+              {% endfor %}
+              <a  href="{% url 'survey-question-create' survey.pk %}" class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm my-5"
+              >
+                <div class="ui button">Add a question</div>
+              </a>
+              
+              {% if questions|length > 0 %}
+              <div class="ui divider"></div>
+              <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mb-5"
+                  >Activate survey
+                </button>
+              </form>
+              {% endif %}
+            </div>
+          </div> 
+          </div>        
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- CREATE Survey -->
+
+  <div class="min-h-full pt-36 gap-0 sm:px-6 lg:px-8">
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div
+        class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+      >
+        <form class="space-y-6" action="" method="POST">
+          {% csrf_token %} {% for field in form %}
+
+          <div class="mb-8">
+            <div class="flex justify-center">
+              <img
+                class="text-center h-8 w-auto mb-5"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+              />
+            </div>
+            <h2 class="text-black font-bold text-3xl text-center mb-5">
+              Name your survey
+            </h2>
+          </div>
+
+          {{ field|as_crispy_field }}
+
+          <div>
+            {% endfor %}
+            <button
+              type="submit"
+              class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- QUESTION CREATE -->
+
+  <div class="min-h-full pt-36 gap-0 sm:px-6 lg:px-8">
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div
+        class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+      >
+
+      <ul>
+        {% for option in options %}
+        <li class="list-none">
+            {{ forloop.counter }}. {{option.text}}
+        </li>
+        {% endfor %}
+      </ul>
+        <form class="" action="" method="POST">
+          {% csrf_token %} 
+            <div class="mb-8">
+                <h2 class="text-black font-bold text-3xl text-center mb-5">
+                    Add a question
+                </h2>
+            </div>
+            <div class="">
+                    {{ form.prompt|as_crispy_field }}
+            </div>
+            <div class="mb-8">
+                <h2 class="text-black font-bold text-3xl text-center mb-5">
+                  Question type
+                </h2>
+            </div>
+            <div id="dropdown" class="">
+                    <div id="dropdown" class="">
+                      {{ form.type|as_crispy_field }}
+                    </div> 
+            </div>
+            <button
+              type="submit"
+              class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+
+        
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ADD OPTIONS -->
+
+
+  {% if question.type == 'Multiple choice' %}
+          <div class="min-h-full pt-36 gap-0 sm:px-6 lg:px-8">
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+              <div
+                class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+              >
+                <form class="space-y-6" action="" method="POST">
+                  {% csrf_token %} 
+                    <div class="mb-8">
+                      <div class=" mb-5">
+                        <h3 class="font-bold text-black text-xl mb-2">Question Prompt:</h3>
+                        {{ question.prompt }}
+                      </div>
+
+                      <div class="mb-5">
+                        <h2 class="text-xl font-bold mb-2">Answer Options:</h2>
+                        <ul>
+                          {% for option in options %}
+                          <li>
+                              {{ forloop.counter }}. {{option.text}}
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                      
+
+                      
+                        <h2 class="text-black font-bold text-xl text-center mb-5">
+                            Add Options
+                        </h2>
+                    </div>
+                    <div class="">
+                            {{ form.text|as_crispy_field }}
+                    </div>
+                  
+                    <button
+                      type="submit"
+                      class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mb-5"
+                    >
+                      Add option
+                    </button>
+                    
+                    {% if options|length > 0 %}
+                <div class="ui divider"></div>
+                <a class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mb-5"
+                href="{% url 'survey-edit' survey.pk %}">
+                  Done adding options
+                </a>
+                {% endif %}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </body>
+    
+        
+        {% endif %}
+
+
+        {% if question.type == 'Comment box' %}
+
+        <div class="min-h-full pt-36 gap-0 sm:px-6 lg:px-8">
+          <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div
+              class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+            >
+              <form class="space-y-6" action="" method="POST">
+                {% csrf_token %} 
+                  <div class="mb-8">
+                    <div class=" mb-5">
+                      <h3 class="font-bold text-black text-xl mb-2">Question Prompt:</h3>
+                      {{ question.prompt }}
+                      
+                    </div>
+
+                    <div class="mb-5">
+                      <h2 class="text-xl font-bold mb-2">User input:</h2>
+                      <ul>
+                        {% for option in options %}
+                        <li>
+                            {{ forloop.counter }}. {{option.text}}
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    
+
+                    
+                      
+                  </div>
+                  <div class="">
+                          {{ form.text|as_crispy_field }}
+                  </div>
+                
+                  <button
+                    type="submit"
+                    class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mb-5"
+                  >
+                    Continue
+                  </button>
+                  
+                  {% if options|length > 0 %}
+              <div class="ui divider"></div>
+              <a class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mb-5"
+              href="{% url 'survey-edit' survey.pk %}">
+                Done adding options
+              </a>
+              {% endif %}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </body>
+        {% endif %}
+
+
+        {% if question.type == 'Checked box' %}
+
+            Checked box
+        {% endif %}
+
+
+
+
+
+
+
+  <!-- SHARE SURVEY detail.html -->
+
+  
+      <div class="flex justify-center mb-8">
+        <p class="font-bold text-5xl">
+          Share your survey <span class="ml-2"> 🎉</span>
+        </p>
+      </div>
+
+      <div class="">
+        <div class="mt-1 flex rounded-md shadow border border-black">
+          <div class="relative flex flex-grow focus-within:z-10">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <!-- Heroicon name: mini/users -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="statc w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+              
+            </div>
+            <input id="input" value="{{ public_url }}" class="block w-full border-r-2 rounded-none rounded-l-md border-black  pl-10  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+          </div>
+          <button type="button" id="button" class="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+            <!-- Heroicon name: mini/bars-arrow-up -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+              </svg>
+            <span>Copy</span>
+          </button>
+        </div>
+
+        <a
+            href="{% url 'dashboard' %}"
+            type="submit"
+            class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm mt-5"
+            >
+            View Dashboard
+        </a>
+      </div>
+
+      <!-- Copied pop up -->
+      
+      
+      <!-- QUESTION -->
+
+      <!-- Survey List -->
+      <div class="bg-white lg:min-w-0 lg:flex-1">
+        <div
+          class=" border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6"
+        >
+          <div class="flex justify-center items-center">
+            <h1 class="flex justify-center text-2xl font-medium">Build Survey</h1>
+          </div>
+        </div>
+        <ul role="list" class="divide-y divide-gray-200 border border-gray-200">
+          <ul>
+            {% for option in options %}
+            <li class="list-none">
+                {{ forloop.counter }}. {{option.text}}
+            </li>
+            {% endfor %}
+          </ul>
+            <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+              <div class="flex items-center justify-center space-x-4">
+                <!-- Repo name and link -->
+                <div class="min-w-0 space-y-3">
+                  <div class="flex items-center space-x-3">
+             
+                  </div>
+                  <div class="">
+                    <ul>
+                      {% for option in options %}
+                      <li class="list-none">
+                          {{ forloop.counter }}. {{option.text}}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+
+                  <form class="flex justify-center flex-col" action="" method="POST">
+                    {% csrf_token %} 
+                      <div class="mb-8 flex justify-center">
+                          <h2 class="text-black font-medium text-xl text-center">
+                              Add a question
+                          </h2>
+                      </div>
+                      <div class="">
+                              {{ form.prompt|as_crispy_field }}
+                      </div>
+                      <div class="mb-3">
+                          <h2 class="text-black font-medium text-xl text-center">
+                            Question type
+                          </h2>
+                      </div>
+                      <div id="dropdown" class="mt-0 pt-0">
+                              <div id="dropdown" class="">
+                                {{ form.type|as_crispy_field }}
+                              </div> 
+                      </div>
+                      <button
+                        type="submit"
+                        class="flex justify-center rounded-md border border-gray-300  py-2 px-4 text-sm font-medium text-black shadow"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </form>
+                  
+                </div>
+                <div class="sm:hidden">
+                  <!-- Heroicon name: mini/chevron-right -->
+                  <svg
+                    class="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+  
+  
+  
+                <!-- Manage button -->
+               
+              </div>
+            </li>
+            <!-- <div class="flex justify-center py-5">
+              <a
+              type="button"
+              class="inline-flex justify-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              id="sort-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              Add Question
+            </a>
+            </div> -->
+           
+          </ul>    
+        </div>
+      
+  </html>
+</html>

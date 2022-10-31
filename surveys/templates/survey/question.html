@@ -1,0 +1,324 @@
+{% load tailwind_tags %} {% load socialaccount %} {% load static %} {% load crispy_forms_tags %}
+<html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      {% tailwind_css %}
+    </head>
+
+    <!-- Background color split screen for large screens -->
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
+<div class="relative flex min-h-full flex-col">
+  <!-- Navbar -->
+  <nav class="flex-shrink-0 bg-black">
+    <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <!-- Logo section -->
+        <div class="flex items-center px-2 lg:px-0 xl:w-64">
+          <a class="flex-shrink-0" href="{% url 'home' %}">
+            <img   class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300" alt="Your Company">
+          </a>
+        </div>
+
+        
+        <!-- NAVBAR SECTION -->
+        <div class="hidden lg:block lg:w-80">
+          <div class="flex items-center justify-end">
+            <div class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div
+                id="my-account"
+               class="flex items-center border border-white py-2 px-4 text-white text-sm rounded hover:cursor-pointer">My account
+                <span><svg
+                  class="ml-2.5 -mr-1.5 h-5 w-5 text-white "
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+                </svg></span>
+              </div>
+            </div>
+
+            <div id="dropdown" class="hidden absolute right-0 top-12 z-10 text-sm bg-white">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manage subscription</a>
+              <a href="{% url 'logout'%}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+            </div>
+
+
+            <!-- Profile dropdown -->
+            <div class="relative ml-4 flex-shrink-0">
+              
+              
+
+              <!--
+                Dropdown menu, show/hide based on menu state.
+
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+              -->
+              <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="lg:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        <!-- Current: "text-white bg-indigo-800", Default: "text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600" -->
+        <a href="#" class="text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
+
+        <a href="#" class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Domains</a>
+      </div>
+      <div class="border-t border-indigo-800 pt-4 pb-3">
+        <div class="space-y-1 px-2">
+          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Your Profile</a>
+
+          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Settings</a>
+
+          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3 column wrapper -->
+  <div class="mx-auto w-full max-w-full flex-grow lg:flex xl:px-8">
+    <!-- Left sidebar & main wrapper -->
+    <div class="min-w-0 flex-1 bg-white xl:flex">
+      <!-- Account profile -->
+      <div class="bg-white xl:w-64 xl:flex-shrink-0 xl:border-r xl:border-gray-200">
+        <div class="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 space-y-8">
+              <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
+                <!-- Profile -->
+                
+                <!-- Action buttons -->
+                <div class="flex flex-col pt-10 sm:flex-row xl:flex-col">
+                  <a href="{% url 'dashboard' %}" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full">Dashboard</a>
+                  <!-- <button type="button" class="mt-3 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"></button> -->
+                </div>
+              </div>
+              <!-- Meta info -->
+              <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+                <!-- <div class="flex items-center space-x-2">
+                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm font-medium text-gray-500">Pro Member</span>
+                </div> -->
+                <!-- <div class="flex items-center space-x-2">
+                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M5.127 3.502L5.25 3.5h9.5c.041 0 .082 0 .123.002A2.251 2.251 0 0012.75 2h-5.5a2.25 2.25 0 00-2.123 1.502zM1 10.25A2.25 2.25 0 013.25 8h13.5A2.25 2.25 0 0119 10.25v5.5A2.25 2.25 0 0116.75 18H3.25A2.25 2.25 0 011 15.75v-5.5zM3.25 6.5c-.04 0-.082 0-.123.002A2.25 2.25 0 015.25 5h9.5c.98 0 1.814.627 2.123 1.502a3.819 3.819 0 00-.123-.002H3.25z" />
+                  </svg>
+                  <span class="text-sm font-medium text-gray-500">{{ survey }}</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Survey List -->
+      <div class="bg-white lg:min-w-0 lg:flex-1">
+        <div
+          class=" border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6"
+        >
+          <div class="flex justify-center items-center">
+            <h1 class="flex justify-center text-2xl font-medium">Build Survey</h1>
+          </div>
+        </div>
+        <ul role="list" class="divide-y divide-gray-200 border border-gray-200">
+          <ul>
+            {% for option in options %}
+            <li class="list-none">
+                {{ forloop.counter }}. {{option.text}}
+            </li>
+            {% endfor %}
+          </ul>
+            <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+              <div class="flex items-center justify-center space-x-4">
+                <!-- Repo name and link -->
+                <div class="min-w-0 space-y-3">
+                  <div class="flex items-center space-x-3">
+             
+                  </div>
+                  <div class="">
+                    <ul>
+                      {% for option in options %}
+                      <li class="list-none">
+                          {{ forloop.counter }}. {{option.text}}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+
+                  <form class="flex justify-center flex-col" action="" method="POST">
+                    {% csrf_token %} 
+                      <div class="mb-8 flex justify-center">
+                          <h2 class="text-black font-medium text-xl text-center">
+                              Add a question
+                          </h2>
+                      </div>
+                      <div class="">
+                              {{ form.prompt|as_crispy_field }}
+                      </div>
+                      <div class="mb-3">
+                          <h2 class="text-black font-medium text-xl text-center">
+                            Question type
+                          </h2>
+                      </div>
+                      <div id="dropdown" class="mt-0 pt-0">
+                              <div id="dropdown" class="">
+                                {{ form.type|as_crispy_field }}
+                              </div> 
+                      </div>
+                      <button
+                        type="submit"
+                        class="flex justify-center rounded-md border border-gray-300  py-2 px-4 text-sm font-medium text-black shadow"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </form>
+                  
+                </div>
+                <div class="sm:hidden">
+                  <!-- Heroicon name: mini/chevron-right -->
+                  <svg
+                    class="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+  
+  
+  
+                <!-- Manage button -->
+               
+              </div>
+            </li>
+            <!-- <div class="flex justify-center py-5">
+              <a
+              type="button"
+              class="inline-flex justify-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              id="sort-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              Add Question
+            </a>
+            </div> -->
+           
+          </ul>    
+        </div>
+
+    
+
+     
+
+        <div class="bg-gray-50 pl-6   sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
+          <div class="w-full lg:w-80">
+            <div class="pt-6 pb-2 border-b border-gray-300">
+              <h2 class="flex justify-center items-center w-full font-semibold mb-3">Roadmap</h2>
+            </div>
+            <div>
+              <ul role="list" class="divide-y divide-gray-200">
+                <li class="py-6">
+                  <div class="flex">
+                    <div class="flex-1 space-y-1">
+                      <div class="pl-5 flex items-center justify-between">
+                        <h3 class="text-sm font-medium">Check multiple</h3>
+                        <p class="text-sm text-gray-500">Q1 23'</p>
+                      </div>
+                      <p class=" pl-5 text-sm text-gray-500">Allow users to check multiple options.</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="py-6">
+                  <div class="flex">
+                    <div class="flex-1 space-y-1">
+                      <div class="pl-5 flex items-center justify-between">
+                        <h3 class="text-sm font-medium">Comment box</h3>
+                        <p class="text-sm text-gray-500">Q2 23'</p>
+                      </div>
+                      <p class=" pl-5 text-sm text-gray-500">Allow users to input text for open ended questions.</p>
+                    </div>
+                  </div>
+                </li>
+    
+                
+    
+                <!-- More items... -->
+              </ul>
+              <div class="border-t border-gray-200 py-4 text-sm">
+                <!-- <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-900">
+                  View all activity
+                  <span aria-hidden="true"> &rarr;</span>
+                </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+    
+  </div>
+</div>
+
+<script>
+
+
+
+const myAccount = document.getElementById('my-account');
+const dropDown = document.getElementById('dropdown');
+
+
+    document.addEventListener('click', (event) => {
+      if(event.target.id != 'my-account') {
+        dropDown.classList.add('hidden')
+      }
+    })
+
+    myAccount.addEventListener('click', function () {
+      dropdown.classList.toggle('hidden')
+    })
+
+
+
+</script>
+
+
+</html>
+
+</html>

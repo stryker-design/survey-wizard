@@ -1,0 +1,97 @@
+{% load tailwind_tags %} {% load socialaccount %} {% load static %}
+<html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      {% tailwind_css %}
+    </head>
+    <nav>{% include 'base/navbar.html' %}</nav>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
+      <div class="mx-auto max-w-3xl">
+        <!-- Content goes here -->
+        <form class="space-y-8 divide-y divide-gray-200">
+            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+              <div class="space-y-6 sm:space-y-5">
+                <div>
+                  <h3 class="pt-10 text-lg font-medium leading-6 text-gray-900">Account information</h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                </div>
+          
+                <div class="space-y-6 sm:space-y-5">
+                  <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Username: <span class="text-gray-700 ml-1">
+                        {{user.username}}
+                    </span> </label>
+                   
+                  </div>
+
+                  <div class=" sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Email: <span class="text-gray-700 ml-1">
+                        {{user.email}}
+
+                    </span></label>
+                   
+                  </div>
+
+                  <div class="border-b border-gray-300 pb-5 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Password:<span class="text-gray-700 ml-1">
+                        **********
+
+                    </span> </label>             
+                  </div>
+
+                  <div class="">
+                    <a class="py-2 px-2 bg-gray-100 rounded hover:bg-gray-400" href="{% url 'manage-account' %}">Edit Information</a>
+                  </div>
+          
+                  
+            </div>
+        </form>
+
+        <form class="space-y-8 divide-y divide-gray-200">
+            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+              <div class="space-y-6 sm:space-y-5">
+                <div>
+                  <h3 class="pt-10 text-lg font-medium leading-6 text-gray-900">Billing information</h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
+                </div>
+          
+                <div class="space-y-6 sm:space-y-5">
+                  <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Username: <span class="text-gray-700 ml-1">
+                        {{user.username}}
+                    </span> </label>
+                   
+                  </div>
+
+                  <div class="  sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Email: <span class="text-gray-700 ml-1">
+                        {{user.email}}
+
+                    </span></label>
+                   
+                  </div>
+
+                  <div class=" sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="username" class="block text-lg font-medium text-black sm:mt-px sm:pt-2">Password:<span class="text-gray-700 ml-1">
+                        **********
+
+                    </span> </label>             
+                  </div>
+
+                  <div class="">
+                    <a class="py-2 px-2 bg-gray-100 rounded hover:bg-gray-400" href="#">Manage Subscription</a>
+                  </div>
+          
+          
+                  
+            </div>
+        </form>
+    </div>
+  </html>
+</html>

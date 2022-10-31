@@ -1,0 +1,153 @@
+{% load tailwind_tags %} {% load socialaccount %} {% load static %}
+<html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      {% tailwind_css %}
+    </head>
+
+    <body>
+      <div class="grid grid-cols-2 min-h-screen">
+        <div class="bg-black flex flex-col pt-32 items-center gap-10">
+          <!-- <a class="mb-10 text-white" href="{% url 'home' %}">LOGO</a> -->
+          <img 
+          src="{% static 'img/bwlogo.png' %}" />
+          <!-- <h2 class="text-white text-3xl">Start surveying with Survey Monkey Today</h2>
+          <p class="text-white text-3xl">It's easy</p>
+          <p class="text-white text-3xl">Add Logo or icon</p> -->
+        </div>
+
+        <div class="min-h-full pt-36 gap-0 sm:px-6 lg:px-8">
+          <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div
+              class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+            >
+              <form class="space-y-6" action="" method="POST">
+                {% csrf_token %}
+
+                <!-- MESSAGE ALERTS -->
+                <div class="">
+                  {% for msg in messages %}
+                  <div class="alert">
+                    <p class="flex gap py-2 px-5 bg-red-200 rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 mr-2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                        />
+                      </svg>
+
+                      {{ msg }}
+                    </p>
+                  </div>
+                  {% endfor %}
+                </div>
+
+               
+
+                <div class="mb-8">
+                  <div class="flex justify-center">
+                    <img
+                      class="text-center h-8 w-auto mb-5"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    />
+                  </div>
+                  <h2 class="text-black font-bold text-3xl text-center mb-5">
+                    Sign in to your account
+                  </h2>
+                </div>
+
+                <div>
+                  <label
+                    for="username"
+                    class="block text-sm font-medium text-gray-700"
+                    >Username</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="username"
+                      name="username"
+                      type="username"
+                      autocomplete="username"
+                      required
+                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    for="password"
+                    class="block text-sm font-medium text-gray-700"
+                    >Password</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autocomplete="current-password"
+                      required
+                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-end mr-2">
+                  <div class="text-sm">
+                    <a
+                      href="{% url 'reset_password' %}"
+                      class="font-medium text-black hover:text-gray-700"
+                      >Forgot your password?</a
+                    >
+                  </div>
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm"
+                  >
+                    Sign in
+                  </button>
+                </div>
+              </form>
+
+              <div class="mt-6">
+                <div class="relative">
+                  <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                  </div>
+                  <div class="relative flex justify-center text-sm">
+                    <span class="bg-white px-2 text-gray-500"
+                      >Or continue with</span
+                    >
+                  </div>
+                </div>
+                  <div>
+                    <a href="{% provider_login_url 'google' method='oauth2' %}" type="submit" href="" class="flex gap-5 w-full justify-center rounded-md border-black border-2 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-5">
+                      Sign in Google
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    <script src="{% static 'main.js' %}"></script>
+  
+  </html>
+</html>

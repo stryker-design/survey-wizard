@@ -1,0 +1,102 @@
+{% load tailwind_tags %} {% load crispy_forms_tags %}
+{% load tailwind_filters %} {% load socialaccount %} {% load static %}
+<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% tailwind_css %}
+  </head class="h-full bg-gray-50">
+
+
+ <!-- MESSAGE ALERTS -->
+ <div class="">
+  {% for msg in messages %}
+  <div class="alert">
+    <p class="flex gap py-2 px-5 bg-red-200 rounded">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 mr-2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+        />
+      </svg>
+
+      {{ msg }}
+    </p>
+  </div>
+  {% endfor %}
+</div>
+
+
+  <body class="h-full">
+<div class="grid grid-cols-2 min-h-screen">
+  <div class="bg-black flex flex-col pt-32 items-center gap-10">
+    <img 
+          src="{% static 'img/bwlogo.png' %}" />
+  </div>
+  <div class="flex min-h-full">
+    <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+      <div class="mx-auto w-full max-w-sm lg:w-96">
+        <div class="">
+          <div
+              class="bg-white shadow-md shadow-black py-8 px-4 sm:rounded-lg sm:px-10"
+            >
+            <form action="" method="POST" class="space-y-6">
+                {% csrf_token %}
+              <div>
+                <label for="email" class="block text-sm font-medium text-black">Username</label>
+                <div class="mt-1">
+                    {{form.username|as_crispy_field}}                </div>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-black">Email</label>
+                <div class="mt-1">
+                    {{form.email|as_crispy_field}}                </div>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-black">Password</label>
+                <div class="mt-1">
+                    {{form.password1|as_crispy_field}}                </div>
+              </div>
+  
+              <div class="space-y-1">
+                <label for="password" class="block text-sm font-medium text-blac">Confirm</label>
+                <div class="mt-1">
+                    {{form.password2|as_crispy_field}}                 </div>
+              </div>
+  
+              <div class="flex items-center justify-end">
+                <div class="text-sm">
+                  <a href="{% url 'login' %}" class="font-medium text-black">Already have an account?</a>
+                </div>
+              </div>
+  
+              <div>
+                <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Register</button>
+              </div>
+            </form>             
+              <div>
+                <a href="{% provider_login_url 'google' method='oauth2' %}" type="submit" href="" class="flex gap-5 w-full justify-center rounded-md border-black border-2 py-2 px-4 text-sm font-medium text-black shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-5">
+                  Register with Google
+                </a>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>
