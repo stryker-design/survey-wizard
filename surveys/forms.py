@@ -48,6 +48,11 @@ class OptionForm(forms.ModelForm):
 #         fields = ['comment']
 
 
+"""Maybe create another form 'CheckedBoxAnswerForm' with the multiple choice field and widget checkboxselectmultiple
+    and do the if statement for question.type in the submit view
+    to use that formset
+    """
+
 class AnswerForm(forms.Form):
     def __init__(self, *args, **kwargs):
         options = kwargs.pop("options")
@@ -57,8 +62,18 @@ class AnswerForm(forms.Form):
         option_field = forms.ChoiceField(choices=choices, widget=forms.RadioSelect, required=True)
         self.fields["option"] = option_field
 
+
+
+        # if question.type == 'Checked box':
+            # option_field = forms.MultipleChoiceField(choices=choices, widget=forms.CheckboxSelectMultiple, required=False)
+
+
 class BaseAnswerFormSet(forms.BaseFormSet):
     def get_form_kwargs(self, index):
         kwargs = super().get_form_kwargs(index)
         kwargs["options"] = kwargs["options"][index]
         return kwargs
+
+
+# class CheckBoxForm(forms.Form):
+#     boxes = forms.BooleanField( )

@@ -63,6 +63,9 @@ INSTALLED_APPS = [
 
     # REST FRAMEWORK
     'rest_framework',
+
+    # CK EDITOR
+    'ckeditor',
     
 ]
 

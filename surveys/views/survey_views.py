@@ -179,25 +179,22 @@ def option_create(request, survey_uuid, question_uuid):
 
 @login_required
 def option_create_checked(request, question_uuid, survey_uuid):
+    survey = get_object_or_404(Survey, uuid=survey_uuid, creator=request.user)
+    question = Question.objects.get(uuid=question_uuid)
+
+    if request.method == "POST":
+        form = OptionForm(request.POST)
+        if form.is_valid():
+            option = form.save(commit=False)
+            option.question = question
+            option.question_uuid = question_uuid
+            option.save()
+    else:
         form = OptionForm()
-        survey = Survey.objects.all()
-        question = Question.objects.get(uuid=question_uuid)
-        context = {'surveys': survey, "question": question, 'form': form}
-
-        if request.method == "POST":
-            form = OptionForm(request.POST)
-            if form.is_valid():
-                option = form.save(commit=False)
-                option.question = question
-
-                option.question_uuid = question_uuid
-                option.save()
-        else:
-            form = OptionForm()
         
-        options = question.option_set.all()
+    options = question.option_set.all()
    
-        return render(request,"survey/options-checked.html", context)
+    return render(request,"survey/options-checked.html", {"survey": survey, "question": question, "options": options, "form": form})
 
 
 def start(request, pk):
@@ -212,6 +209,7 @@ def start(request, pk):
 
 def submit(request, survey_pk, sub_pk):
     """Survey-taker submit their completed survey."""
+
     try:
         survey = Survey.objects.prefetch_related("question_set__option_set").get(
             pk=survey_pk, is_active=True
@@ -223,6 +221,14 @@ def submit(request, survey_pk, sub_pk):
         sub = survey.submission_set.get(pk=sub_pk, is_complete=False)
     except Submission.DoesNotExist:
         raise Http404()
+
+    
+    
+
+    # if question.type == 'Checked box':
+    
+    #     return redirect('submit', survey_uuid=survey.uuid)
+
 
     questions = survey.question_set.all()
     options = [q.option_set.all() for q in questions]
@@ -262,14 +268,3 @@ def thanks(request, pk):
 
 
 
-#Goes in optiom create
-
-
-    # if question.type == 'Checked box':
-    #     form = OptionForm()
-    #     survey = get_object_or_404(Survey, uuid=survey_uuid, creator=request.user)
-    #     question = Question.objects.get(uuid=question_uuid)
-    #     options = question.option_set.all()
-    #     context = {"survey": survey, "question": question, "options": options, "form": form}
-    #     uuid = question_uuid
-    #     return redirect('survey-option-create-checked', context)
