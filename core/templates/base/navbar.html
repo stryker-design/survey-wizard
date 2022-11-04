@@ -1,3 +1,4 @@
+{% load static %}
 <!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-black">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -61,28 +62,21 @@
         class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
       >
         <div class="flex flex-shrink-0 items-center">
-          <a href="{% url 'home' %}">
-            <p>SW</p>
+          <a href="{% url 'home' %}" class="">
+            <img
+              class="h-12 w-auto pr-64"
+              src="{% static 'img/swnav5.png' %}"
+            />
           </a>
-
-          <a href="{% url 'home' %}">
-            <p class="text-white font-extrabold text-2xl pr-64">Survey Wiz</p>
-          </div>
-        </a>
-          <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
+        </div>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex mt-2 space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
               href="{% url 'dashboard' %}"
               class="text-white px-3 py-2 rounded-md text-sm font-medium"
               aria-current="page"
               >Dashboard</a
-            >
-
-            <a
-              href="#"
-              class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Product</a
             >
 
             <a
@@ -96,63 +90,93 @@
               class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >Pricing</a
             >
+
+            <a
+              href="{% url 'roadmap' %}"
+              class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >Roadmap
+            </a>
           </div>
         </div>
       </div>
 
       {% if user.is_authenticated %}
-      <div class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div
+        class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
         <div
           id="my-account"
-         class="flex items-center border border-white py-2 px-4 text-white text-sm rounded hover:cursor-pointer">My account
-          <span><svg
-            class="ml-2.5 -mr-1.5 h-5 w-5 text-white "
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-          <path
-            fill-rule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            clip-rule="evenodd"
-          />
-          </svg></span>
+          class="flex items-center border border-white py-2 px-4 text-white text-sm rounded hover:cursor-pointer"
+        >
+          My account
+          <span
+            ><svg
+              id="my-account"
+              class="ml-2.5 -mr-1.5 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              /></svg
+          ></span>
         </div>
       </div>
 
       {% else %}
 
       <!-- LOGIN/SIGNUP -->
-      <div class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <a class="py-2 px-6  border border-solid border-white text-white text-sm rounded" href="{% url 'login' %}">Login</a>
-          <a  class="py-2 px-6 border border-solid border-white text-white text-sm rounded" href="{% url 'signup' %}">Sign up &rarr;</a>
+      <div
+        class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
+        <a
+          class="py-2 px-6 border border-solid border-white text-white text-sm rounded"
+          href="{% url 'login' %}"
+          >Login</a
+        >
+        <a
+          class="py-2 px-6 border border-solid border-white text-white text-sm rounded"
+          href="{% url 'signup' %}"
+          >Sign up &rarr;</a
+        >
       </div>
     </div>
   </div>
   {% endif %}
 
-  <div id="dropdown" class="hidden absolute right-0 top-12 z-10 text-sm bg-white">
-    <a href="{% url 'account' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manage subscription</a>
-    <a href="{% url 'logout'%}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+  <div
+    id="dropdown"
+    class="hidden absolute right-0 top-12 z-10 text-sm bg-white"
+  >
+    <a
+      href="{% url 'account' %}"
+      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      >Manage subscription</a
+    >
+    <a
+      href="{% url 'logout'%}"
+      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      >Logout</a
+    >
   </div>
 
   <script>
-    const myAccount = document.getElementById('my-account');
-    const dropDown = document.getElementById('dropdown');
-    
+    const myAccount = document.getElementById("my-account");
+    const dropDown = document.getElementById("dropdown");
 
-    document.addEventListener('click', (event) => {
-      if(event.target.id != 'my-account') {
-        dropDown.classList.add('hidden')
+    document.addEventListener("click", (event) => {
+      if (event.target.id != "my-account") {
+        dropDown.classList.add("hidden");
       }
-    })
+    });
 
-    myAccount.addEventListener('click', function () {
-      dropdown.classList.toggle('hidden')
-    })
-
-
+    myAccount.addEventListener("click", function () {
+      dropdown.classList.toggle("hidden");
+    });
   </script>
 
   <!-- Mobile menu, show/hide based on menu state. -->

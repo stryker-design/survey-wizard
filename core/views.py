@@ -10,5 +10,9 @@ def index(request):
     context = {}
     return render(request, 'core/index.html', context)
 
+def roadmap(request):
+    context = {}
+    return render(request, 'core/roadmap.html', context)
+
 
 

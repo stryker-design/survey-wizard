@@ -13,95 +13,7 @@
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
 <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
-  <!-- Navbar -->
-  <nav class="flex-shrink-0 bg-black">
-    <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-      <div class="relative flex h-16 items-center justify-between">
-        <!-- Logo section -->
-        <div class="flex items-center px-2 lg:px-0 xl:w-64">
-          <a class="flex-shrink-0" href="{% url 'home' %}">
-            <img   class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300" alt="Your Company">
-          </a>
-        </div>
-
-        
-        <!-- NAVBAR SECTION -->
-        <div class="hidden lg:block lg:w-80">
-          <div class="flex items-center justify-end">
-            <div class="absolute inset-y-0 right-0 flex gap-4 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div
-                id="my-account"
-               class="flex items-center border border-white py-2 px-4 text-white text-sm rounded hover:cursor-pointer">My account
-                <span><svg
-                  class="ml-2.5 -mr-1.5 h-5 w-5 text-white "
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  clip-rule="evenodd"
-                />
-                </svg></span>
-              </div>
-            </div>
-
-            <div id="dropdown" class="hidden absolute right-0 top-12 z-10 text-sm bg-white">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Manage subscription</a>
-              <a href="{% url 'logout'%}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
-            </div>
-
-
-            <!-- Profile dropdown -->
-            <div class="relative ml-4 flex-shrink-0">
-              
-              
-
-              <!--
-                Dropdown menu, show/hide based on menu state.
-
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
-              <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="lg:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-        <!-- Current: "text-white bg-indigo-800", Default: "text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600" -->
-        <a href="#" class="text-white bg-indigo-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-
-        <a href="#" class="text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Domains</a>
-      </div>
-      <div class="border-t border-indigo-800 pt-4 pb-3">
-        <div class="space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Your Profile</a>
-
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Settings</a>
-
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">Sign out</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+ 
 
   <!-- 3 column wrapper -->
   <div class="mx-auto w-full max-w-full flex-grow lg:flex xl:px-8">
@@ -114,27 +26,93 @@
             <div class="flex-1 space-y-8">
               <div class="space-y-8 sm:flex sm:items-center sm:justify-between sm:space-y-0 xl:block xl:space-y-8">
                 <!-- Profile -->
+                <div class="flex items-center gap-4">
+                  <div class="h-12 w-12 flex-shrink-0">
+                    <a href="{% url 'account' %}">
+                      <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-black">
+                        <span class="text-lg font-medium leading-none text-white uppercase">{{ user.username|make_list|first }}</span>
+                      </a>
+                    </span>
+                  </div>
+                  <div class="">
+                    <a href="{% url 'account' %}">
+
+                      <div class="text-lg font-medium text-gray-900 capitalize">{{user.username}}</div>
+                      <div class=" flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6 sm:mt-0">
+                        <!-- Heroicon name: mini/check-circle -->
+                        
+                        Pro Member
+                      </div>
+                    </a>
+
+                  </div>
+                </div>
                 
                 <!-- Action buttons -->
-                <div class="flex flex-col pt-10 sm:flex-row xl:flex-col">
-                  <a href="{% url 'survey-create' %}" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full">New Survey</a>
-                  <!-- <button type="button" class="mt-3 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"></button> -->
+                <div class="flex flex-col sm:flex-row xl:flex-col">
+                  <a href="{% url 'survey-create' %}" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-black px-4 py-2  text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 xl:w-full">New Survey</a>
+                  <a href="{% url 'home' %}" type="button" class="mt-3 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full">Home</a>
                 </div>
               </div>
               <!-- Meta info -->
               <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
-                <!-- <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-                  </svg>
-                  <span class="text-sm font-medium text-gray-500">Pro Member</span>
-                </div> -->
-                <!-- <div class="flex items-center space-x-2">
-                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M5.127 3.502L5.25 3.5h9.5c.041 0 .082 0 .123.002A2.251 2.251 0 0012.75 2h-5.5a2.25 2.25 0 00-2.123 1.502zM1 10.25A2.25 2.25 0 013.25 8h13.5A2.25 2.25 0 0119 10.25v5.5A2.25 2.25 0 0116.75 18H3.25A2.25 2.25 0 011 15.75v-5.5zM3.25 6.5c-.04 0-.082 0-.123.002A2.25 2.25 0 015.25 5h9.5c.98 0 1.814.627 2.123 1.502a3.819 3.819 0 00-.123-.002H3.25z" />
-                  </svg>
-                  <span class="text-sm font-medium text-gray-500">{{ survey }}</span>
-                </div> -->
+                <div class=" space-x-2">
+                  <p class="text-sm font-medium text-gray-500 pt-5 uppercase">Learning & Resources</p>
+                  <ul>
+                    
+                    <li class="pt-2"><a href="" class="flex pt-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                      </svg>
+                      
+                      <span class="ml-2">What's new</span>
+                    </a></li>
+
+                    <li class="pt-2"><a href="" class="flex pt-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                      </svg>
+                      
+                      <span class="ml-2">Roadmap</span>
+                    </a></li>
+                    
+                    <li class="pt-2"><a href="" class="flex pt-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                      </svg>
+                      
+                      
+                      <span class="ml-2">Youtube</span>
+                    </a></li>
+                  </ul>
+                </div>
+                
+                <div class="space-x-2">
+                  
+                  <p class="text-sm font-medium text-gray-500 uppercase">Help & support</p>
+                  <ul>
+                    
+                    <li class="pt-2"><a href="" class="flex pt-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                      
+                      
+                      <span class="ml-2">Email us</span>
+                    </a></li>
+
+                    <li class="pt-2">
+                      <a href="https://twitter.com/Survey_wizard" target="_blank" class="flex pt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                      
+                      <span class="ml-2">Tweet @survey_wizard</span>
+                    </a> 
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-44">
+                 <img class=" w-auto " src="{% static 'img/swlogohat.png' %}">
+                </div>
               </div>
             </div>
           </div>
@@ -265,7 +243,7 @@
           <h3 class="mt-2 text-sm font-medium text-gray-900">No surveys</h3>
           <p class="mt-1 text-sm text-gray-500">Get started by creating a new survey.</p>
           <div class="mt-6">
-            <a href="{% url 'survey-create' %}" type="button" class="mb-10 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <a href="{% url 'survey-create' %}" type="button" class="mb-10 inline-flex items-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <!-- Heroicon name: mini/plus -->
               <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
@@ -278,35 +256,7 @@
       </div>
     </div>
 
-    <div class="bg-gray-50   sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
-      <div class="w-full lg:w-80">
-        <div class="pt-6 pb-2 border-b border-gray-300">
-          <h2 class="flex justify-center items-center w-full font-semibold mb-3">Roadmap</h2>
-        </div>
-        <div>
-          <ul role="list" class="divide-y divide-gray-200">
-            <li class="py-6">
-              <div class="flex">
-                <div class="flex-1 space-y-1">
-                  <div class="pl-5 flex items-center justify-between">
-                    <h3 class="text-sm font-medium">Check multiple</h3>
-                    <p class="text-sm text-gray-500">Q1 23'</p>
-                  </div>
-                  <p class=" pl-5 text-sm text-gray-500">Allow users to check multiple options.</p>
-                </div>
-              </div>
-            </li>
-            <li class="py-6">
-              <div class="flex">
-                <div class="flex-1 space-y-1">
-                  <div class="pl-5 flex items-center justify-between">
-                    <h3 class="text-sm font-medium">Comment box</h3>
-                    <p class="text-sm text-gray-500">Q2 23'</p>
-                  </div>
-                  <p class=" pl-5 text-sm text-gray-500">Allow users to input text for open ended questions.</p>
-                </div>
-              </div>
-            </li>
+   
 
             
 

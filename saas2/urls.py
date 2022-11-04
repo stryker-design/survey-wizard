@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('users.urls')),
     path('', include('surveys.urls')),
+    path('', include('blog.urls')),
 
     # DRF
     path('api-auth/', include('rest_framework.urls')),
