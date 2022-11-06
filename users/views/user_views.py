@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from users.models import StripeCustomer  
 
 # USER SIGNUP, LOGIN, SIGNOUT
-from ..forms import NewUserForm, ManageAccountForm
+from ..forms import NewUserForm, ManageAccountForm, CancelForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -21,6 +21,11 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # Password Reset
 from django.contrib.auth import views as auth_views 
+
+# CONTACT IMPORTS
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import message 
 
 
 def signup(request):
@@ -81,6 +86,18 @@ def manage_account(request):
         form = ManageAccountForm(instance=request.user)
         context = {'form': form}
         return render(request, 'users/manage-account.html', context)
+
+def cancel_subscription(request):
+    form = CancelForm()
+    if request.method == "POST":
+        form = CancelForm(request.POST)
+        if form.is_valid():
+            email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["first_name"]}'
+            email_message = form.cleaned_data['message']
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, [settings.ADMIN_EMAILS])
+            return redirect('home')
+    context = {'form': form}
+    return render(request, 'users/cancel-subscription.html', context)
 
 
 

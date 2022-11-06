@@ -88,33 +88,24 @@ fetch("/config/")
     }
   });
 
-// ANIMATION
+// const manageBtn = document.getElementById("manage-survey");
+// const manageDropDown = document.getElementById("manage-dropdown");
 
-// $(window).on("load", function () {
-//   $(".load-wrapper").fadeOut("slow");
+// manageBtn.addEventListener("click", function () {
+//   manageDropDown.classList.remove("hidden");
 // });
 
-barba.init({
-  transitions: [
-    {
-      name: "opacity-transition",
-      leave(data) {
-        return gsap.to(data.current.container, {
-          opacity: 0,
-        });
-      },
-      enter(data) {
-        return gsap.from(data.next.container, {
-          opacity: 0,
-        });
-      },
-    },
-  ],
+// MOBILE MENU
+
+const closeMenu = document.getElementById("close-menu");
+const mobileMenu = document.getElementById("mobile-menu");
+
+closeMenu.addEventListener("click", function () {
+  mobileMenu.classList.add("hidden");
 });
 
-const manageBtn = document.getElementById("manage-survey");
-const manageDropDown = document.getElementById("manage-dropdown");
+const openMenu = document.getElementById("open-menu");
 
-manageBtn.addEventListener("click", function () {
-  manageDropDown.classList.remove("hidden");
+openMenu.addEventListener("click", function () {
+  mobileMenu.classList.remove("hidden");
 });

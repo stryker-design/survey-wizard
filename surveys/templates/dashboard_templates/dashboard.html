@@ -193,7 +193,7 @@
                 class="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex"
               >
                 <p class="flex items-center space-x-4">
-                  <button
+                  <!-- <button
                     id="manage-survey"
                     class=" flex relative text-sm px-4 py-2 border border-gray-300 rounded font-medium text-gray-700 hover:stroke-black hover:text-black manage-survey"
                     >Manage
@@ -210,13 +210,57 @@
                         clip-rule="evenodd"
                       />
                     </svg></span>
-                  </button>
+                  </button> -->
+
+
+
+                 
+
+                  <div class="flex gap-2">
+                    {% if survey.is_active %}
+                    <a href="{% url 'survey-detail' survey.uuid %}" class="text-black hover:text-gray-700">
+                      Share
+                    </a>
+                    <p class="">
+                      &middot;
+                    </p>
+                    <a href="{% url 'results' survey.uuid %}"  class="text-black hover:text-gray-700">
+                      Results
+                    </a>
+                    <p class="">
+                      &middot;
+                    </p>
+                    <form method="post" action="{% url 'survey-delete' survey.uuid %}">
+                      {% csrf_token%}
+                      <button type="submit"  class="hover:text-gray-700">Delete</button>
+                    </form>
+
+                    {% else %}
+
+                    <a href="{% url 'survey-detail' survey.uuid %}" class="text-black hover:text-gray-700">
+                      Edit
+                    </a>
+                    <p class="">
+                      &middot;
+                    </p>
+                    <!-- <a href="{% url 'results' survey.uuid %}"  class="text-black">
+                      View results
+                    </a> -->
+                    <!-- <p class="">
+                      &middot;
+                    </p> -->
+                    <form method="post" action="{% url 'survey-delete' survey.uuid %}">
+                      {% csrf_token%}
+                      <button type="submit"  class="hover:text-gray-700">Delete</button>
+                    </form>
+                    {% endif %}
+                  </div>
 
                   <p class="flex space-x-2 text-sm text-gray-500">
                     <span>Created on {{ survey.created_at|date }}</span>
                   </p>
 
-                  <div id="manage-dropdown" class="hidden absolute right-0 top-12 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none manage-dropdown" >
+                  <!-- <div id="manage-dropdown" class="hidden absolute right-0 top-12 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none manage-dropdown" >
                     {% if survey.is_active %}
 
                     <a href="{% url 'survey-detail' survey.uuid %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Share</a>
@@ -237,7 +281,7 @@
                     {% endif %}
                 </p>
 
-              </div>
+              </div> -->
             </div>
           </li>
           {% endfor %}

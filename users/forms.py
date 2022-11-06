@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, UserChangeForm
 from django.contrib.auth.models import User 
 from crispy_forms.helper import FormHelper
+from users.models import CancelSubscription
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -41,5 +42,17 @@ class ManageAccountForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+
+class CancelForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+            super(CancelForm, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.form_show_labels = False 
+
+    class Meta:
+        model = CancelSubscription
+        fields = '__all__'
 
 

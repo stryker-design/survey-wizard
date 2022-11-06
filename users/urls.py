@@ -20,6 +20,7 @@ urlpatterns = [
         path('logout/', user_views.logout_request, name='logout'),
         path('account/', user_views.account, name='account'),
         path('manage-account/', user_views.manage_account, name='manage-account'),
+        path('cancel-subscription/', user_views.cancel_subscription, name='cancel-subscription'),
 
         # PASSWORD RESET
         # Submit email form

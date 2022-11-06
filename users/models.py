@@ -15,7 +15,7 @@ class StripeCustomer(models.Model):
         return self.user.username
 
 
-class Contact(models.Model):
+class CancelSubscription(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()

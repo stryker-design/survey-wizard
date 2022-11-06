@@ -244,6 +244,8 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 
 SENDGRID_API_KEY = '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'
 
+CONTACT_EMAIL = ''
+ADMIN_EMAILS = 'stryker.web.design@gmail.com'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
