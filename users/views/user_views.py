@@ -65,14 +65,13 @@ def logout_request(request):
     return redirect('home')
 
 def account(request):
-    context = {'user': request.user}
-    return render(request, 'users/account.html', context)
+    return render(request, 'users/account.html')
 
 
 def manage_account(request):
-    if request.method == 'POST':
-        form = ManageAccountForm(request.POST, instance=request.user) 
+    form = ManageAccountForm(request.POST, instance=request.user) 
 
+    if request.method == 'POST':
         if form.is_valid():
             form.save()
             return redirect('account') # May need changed to users/account.html

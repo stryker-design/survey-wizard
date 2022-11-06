@@ -14,8 +14,13 @@ class StripeCustomer(models.Model):
     def __str__(self):
         return self.user.username
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return str(self.user)
+class Contact(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField(max_length=1000)
+
+    def __str__(self):
+        return self.email

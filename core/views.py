@@ -14,5 +14,10 @@ def roadmap(request):
     context = {}
     return render(request, 'core/roadmap.html', context)
 
+def contact(request):
+    f
+    context = {}
+    return render(request, 'core/contact.html', context)
+
 
 

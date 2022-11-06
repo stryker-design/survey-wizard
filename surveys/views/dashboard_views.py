@@ -10,13 +10,19 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
+from django.conf import settings
+
 from requests import options
 
 from ..models import Survey, Question, Answer, Submission
 from ..forms import SurveyForm, QuestionForm, OptionForm, AnswerForm, BaseAnswerFormSet
 
-@login_required
+@login_required(redirect_field_name='login')
 def dashboard_view(request):
+    # Build an error you must be logged in page to redirect to
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+
     surveys = Survey.objects.filter(creator=request.user).order_by("-created_at").all()
 
 

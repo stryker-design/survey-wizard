@@ -20,18 +20,6 @@ class NewUserForm(UserCreationForm):
         model = User
         fields = ("username", "email", "password1", "password2")
 
-    # def clean(self):
-    #     cleaned_data=super.clean('username')
-    #     if User.objects.filter(username=cleaned_data["username"].exists()):
-    #         raise forms.ValidationError("The username is taken, please try another one")
-
-    # def clean_username(self):
-    #     username = self.cleaned_data["username"]
-    #     try:
-    #         User.objects.get(username=username)
-    #     except User.DoesNotExist:
-    #         return username
-    #     raise forms.ValidationError("A user with that username already exists.")
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
