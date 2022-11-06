@@ -1,1 +1,1 @@
-web: gunicorn saas_app_main.wsgi --log-file -
+web: gunicorn saas2.wsgi --log-file -
