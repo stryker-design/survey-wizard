@@ -1,1 +1,0 @@
-- Migrate name change from text to checked_box
