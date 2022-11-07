@@ -132,9 +132,9 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pt-44">
+                <!-- <div class="pt-44">
                  <img class=" w-auto " src="{% static 'img/swlogohat.png' %}">
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@
 
                   <form class="flex justify-center flex-col" action="" method="POST">
                     {% csrf_token %} 
-                      <div class="mb-8 flex justify-center">
+                      <div class="mb-3 flex justify-center">
                           <h2 class="text-black font-medium text-xl text-center">
                               Add a question
                           </h2>
@@ -202,44 +202,8 @@
                         Continue
                       </button>
                     </div>
-                  </form>
-                  
-                </div>
-                <div class="sm:hidden">
-                  <!-- Heroicon name: mini/chevron-right -->
-                  <svg
-                    class="h-5 w-5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-  
-  
-  
-                <!-- Manage button -->
-               
-              </div>
-            </li>
-            <!-- <div class="flex justify-center py-5">
-              <a
-              type="button"
-              class="inline-flex justify-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              id="sort-menu-button"
-              aria-expanded="false"
-              aria-haspopup="true"
-            >
-              Add Question
-            </a>
-            </div> -->
-           
+                  </form> 
+                </div>     
           </ul>    
         </div>
 
@@ -254,27 +218,7 @@
   </div>
 </div>
 
-<script>
 
-
-
-const myAccount = document.getElementById('my-account');
-const dropDown = document.getElementById('dropdown');
-
-
-    document.addEventListener('click', (event) => {
-      if(event.target.id != 'my-account') {
-        dropDown.classList.add('hidden')
-      }
-    })
-
-    myAccount.addEventListener('click', function () {
-      dropdown.classList.toggle('hidden')
-    })
-
-
-
-</script>
 
 
 </html>
