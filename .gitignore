@@ -1,0 +1,29 @@
+# created by virtualenv automatically
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Unit test / coverage reports 
+htmlcov/ 
+.coverage 
+.coverage.* 
+.cache 
+.pytest_cache/ 
+nosetests.xml 
+coverage.xml 
+*.cover 
+
+# pyenv 
+.python-version 
+
+# Environments 
+.env 
+env/ 
+
+# mypy 
+.mypy_cache/ 
