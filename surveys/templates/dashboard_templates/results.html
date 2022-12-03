@@ -1,41 +1,10 @@
-{% load tailwind_tags %} {% load socialaccount %} {% load static %}
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      {% tailwind_css %}
+{% extends 'base/base.html' %}
+{% load static %}
 
-  <!-- HTML Meta Tags -->
-  <title>Survey Wizard - The Fastest & Easiest Survey Generator</title>
-  <meta name="description" content="Publish your questionnaires and view all results in real-time. ">
-
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="http://surveywizard.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-  <meta property="og:description" content="Publish your questionnaires and view all results in real-time. ">
-  <meta property="og:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="surveywizard.io">
-  <meta property="twitter:url" content="http://surveywizard.io/">
-  <meta name="twitter:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-  <meta name="twitter:description" content="Publish your questionnaires and view all results in real-time. ">
-  <meta name="twitter:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
-          </head>
-
-
-
-
+{% block content %}
     <!-- Background color split screen for large screens -->
 <div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2" aria-hidden="true"></div>
 <div class="relative flex min-h-full flex-col">
  
 
@@ -195,31 +164,13 @@
         {% endfor %}
       </div>
     </div>
-
-    
-<script>
-  const myAccount = document.getElementById('my-account');
-const dropDown = document.getElementById('dropdown');
-
-
-    document.addEventListener('click', (event) => {
-      if(event.target.id != 'my-account') {
-        dropDown.classList.add('hidden')
-      }
-    })
-
-    myAccount.addEventListener('click', function () {
-      dropdown.classList.toggle('hidden')
-    })
-</script>
-    
   </div>
 </div>
 </html>
 </html>
 
 
-
+{% endblock %}
 
 
 

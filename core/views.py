@@ -45,5 +45,8 @@ def contact(request):
     context = {'form': form}
     return render(request, 'core/contact.html', context)
 
+def not_found(request, exception):
+    return render('request', 'core/not-found.html')
+
 
 

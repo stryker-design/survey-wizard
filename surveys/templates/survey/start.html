@@ -1,36 +1,9 @@
-{% load tailwind_tags %} {% load socialaccount %} {% load static %}
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      {% tailwind_css %}
-\
-<!-- HTML Meta Tags -->
-<title>Survey Wizard - The Fastest & Easiest Survey Generator</title>
-<meta name="description" content="Publish your questionnaires and view all results in real-time. ">
-
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="http://surveywizard.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-<meta property="og:description" content="Publish your questionnaires and view all results in real-time. ">
-<meta property="og:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="surveywizard.io">
-<meta property="twitter:url" content="http://surveywizard.io/">
-<meta name="twitter:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-<meta name="twitter:description" content="Publish your questionnaires and view all results in real-time. ">
-<meta name="twitter:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-<!-- Meta Tags Generated via https://www.opengraph.xyz -->
-      
-    </head>
+{% block content %}
 
     <main class="mx-auto mt-16 max-w-7xl px-4 sm:mt-24">
       <div class="text-center">
@@ -60,3 +33,5 @@
     </main>
   </html>
 </html>
+
+{% endblock %}

@@ -1,14 +1,9 @@
-{% load tailwind_tags %} {% load crispy_forms_tags %}
-{% load tailwind_filters %} {% load socialaccount %} {% load static %}
-<html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    {% tailwind_css %}
-  </head class="h-full bg-gray-50">
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
 
 
  <!-- MESSAGE ALERTS -->
@@ -100,3 +95,5 @@
 
   </body>
 </html>
+
+{% endblock %}

@@ -1,16 +1,9 @@
-{% load tailwind_tags %} {% load socialaccount %} {% load static %}
-
-
+{% extends 'base/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      {% tailwind_css %}
-    </head>
+
+
+{% block content %}
 
     <div class="overflow-hidden bg-white py-16 px-4 sm:px-6 lg:px-8 lg:py-24">
       <div class="relative mx-auto max-w-xl">
@@ -155,3 +148,5 @@
     </div>
   </html>
 </html>
+
+{% endblock %}

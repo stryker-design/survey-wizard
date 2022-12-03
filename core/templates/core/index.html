@@ -1,40 +1,10 @@
-{% load tailwind_tags %} {% load static %}
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-      {% tailwind_css %}
-
-  <!-- HTML Meta Tags -->
-  <title>Survey Wizard - The Fastest & Easiest Survey Generator</title>
-  <link rel="shortcut icon" type="image/jpg" href="{% static 'img/favicon.ico' %}"/>
-
-  <meta name="description" content="Publish your questionnaires and view all results in real-time. ">
-
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="http://surveywizard.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-  <meta property="og:description" content="Publish your questionnaires and view all results in real-time. ">
-  <meta property="og:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="surveywizard.io">
-  <meta property="twitter:url" content="http://surveywizard.io/">
-  <meta name="twitter:title" content="Survey Wizard - The Fastest & Easiest Survey Generator">
-  <meta name="twitter:description" content="Publish your questionnaires and view all results in real-time. ">
-  <meta name="twitter:image" content="https://i.ibb.co/xYSHjgs/Swizard.png">
-
-  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
-        
-    </head>
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
     <body>
       <main>
+        {% block content %}
         {% include 'base/navbar.html' %}
 
         <div class="bg-white">
@@ -755,7 +725,8 @@
 
       </main>
     </body>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="{% static 'main.js' %}"></script>
+    
+    {% endblock %}
+ 
   </html>
 </html>

@@ -1,14 +1,10 @@
-{% load tailwind_tags %} {% load socialaccount %} {% load static %}
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      {% tailwind_css %}
-    </head>
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load socialaccount %} 
 
+
+{% block content %}
     <body class="bg-black">
       <div class="px-4">
         
@@ -140,7 +136,8 @@
         </div>
       </div>
     </body>
-    <script src="{% static 'main.js' %}"></script>
-  
   </html>
 </html>
+
+
+{% endblock %}
