@@ -221,15 +221,6 @@ def submit(request, survey_pk, sub_pk):
         sub = survey.submission_set.get(pk=sub_pk, is_complete=False)
     except Submission.DoesNotExist:
         raise Http404()
-
-    
-    
-
-    # if question.type == 'Checked box':
-    
-    #     return redirect('submit', survey_uuid=survey.uuid)
-
-
     questions = survey.question_set.all()
     options = [q.option_set.all() for q in questions]
     form_kwargs = {"empty_permitted": False, "options": options}
