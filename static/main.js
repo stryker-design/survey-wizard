@@ -88,12 +88,7 @@ fetch("/config/")
     }
   });
 
-// const manageBtn = document.getElementById("manage-survey");
-// const manageDropDown = document.getElementById("manage-dropdown");
 
-// manageBtn.addEventListener("click", function () {
-//   manageDropDown.classList.remove("hidden");
-// });
 
 // MOBILE MENU
 
